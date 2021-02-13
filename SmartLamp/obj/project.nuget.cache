@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "L7anYjkhwRVYzYo77wjE8VFr+UaCUgbwAGa4s5nq7TLQ5D96PS+dqDUUX05zFhhbBZ7XniYfcDCu2kKvmvjh3A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\muril\\Documents\\GitHub\\Smart Lamp\\App\\MP.Enertron.SmartLamp\\SmartLamp\\SmartLamp.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\muril\\.nuget\\packages\\materialdesigncolors\\1.2.7\\materialdesigncolors.1.2.7.nupkg.sha512",
+    "C:\\Users\\muril\\.nuget\\packages\\materialdesignthemes\\3.2.0\\materialdesignthemes.3.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

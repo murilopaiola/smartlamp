@@ -1,0 +1,813 @@
+﻿<Window x:Class="SmartLamp.MainWindow"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartLamp"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Title="Smart Lamp" Height="650" Width="770"
+        Background="#3E4960">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Smart Lamp Setup"
+                   FontSize="36"
+                   Grid.ColumnSpan="2"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   TextWrapping="Wrap">
+        </TextBlock>
+
+        <Rectangle
+            Fill="#333C4E" RadiusY="5" RadiusX="5" Margin="14 14 175 7">
+        </Rectangle>
+
+        <!--Converter Power-->
+        <Grid Grid.Column="1"
+              Margin="175 14 14 7">
+            <Rectangle Fill="#333C4E" RadiusY="5" RadiusX="5"/>
+
+            <Grid Margin="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Converter Power"
+                   FontWeight="UltraLight"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Grid.ColumnSpan="2"
+                   FontSize="18"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"/>
+
+                <Grid Grid.Row="1" Margin="10 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Low-->
+                    <RadioButton GroupName="Converter" Content="Low" HorizontalAlignment="Center"
+                                 BorderBrush="#15A4FA"
+                                 Background="#15A4FA"
+                                 Foreground="White">
+                    </RadioButton>
+                    <!--High-->
+                    <RadioButton GroupName="Converter" Content="High" HorizontalAlignment="Center" Grid.Column="1"
+                                 Foreground="White"
+                                 BorderBrush="#15A4FA"
+                                 Background="#15A4FA"/>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--INPUT-->
+        <Grid Grid.Row="1"
+              Margin="14 7 7 7">
+
+            <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2"
+                   Fill="#333C4E" RadiusY="5" RadiusX="5">
+            </Rectangle>
+            
+            <Grid Margin="5 35 5 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Left column-->
+                <StackPanel Margin="10 10 5 10">
+                    <!--Net-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                        </TextBox>
+                    </Grid>
+
+                    <!--Id-->
+                    <Grid Margin="0 15 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Id" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-4000"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                        </TextBox>
+                    </Grid>
+
+                    <!--Output Range-->
+                    <Grid Margin="3 25 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Grid.Column="0"
+                             Margin="0 -12 7 0"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.HelperText="1, 2, 3 or 1-4000"
+                             FontSize="14"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Hint="Output Range"
+                             materialDesign:HintAssist.Foreground="White">
+                        </TextBox>
+                        <Grid Grid.Column="1" Margin="5 -3 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <!--Read-->
+                            <Button ToolTip="Read"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                                <Grid Margin="-10 -12 -10 -10">
+                                    <TextBlock Text="R" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+                            <!--Write-->
+                            <Button ToolTip="Write"
+                                Grid.Row="1"
+                                Margin="0 8 0 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                                <Grid Margin="-10 -12 -10 -10">
+                                    <TextBlock Text="W" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+                        </Grid>
+                        
+                    </Grid>
+
+                </StackPanel>
+                
+                <!--Right column-->
+                <StackPanel Grid.Column="1" Margin="5 10 10 0">
+                    <!--Group-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                        </TextBox>
+                    </Grid>
+                    
+                    <!--LED, PIR, LDR-->
+                    <Grid Margin="0 15 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!--LED-->
+                        <StackPanel>
+                            <Label Content="LED" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 10"/>
+                            <Ellipse Fill="Red"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                            <Ellipse Fill="Green"
+                                     Margin="0 8"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                            <Ellipse Fill="Blue"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                        </StackPanel>
+                        
+                        <!--PIR-->
+                        <StackPanel Grid.Column="2">
+                            <Label Content="PIR" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 5"/>
+                            <Button Margin="8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="+" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+
+                            <TextBox Grid.Column="1"
+                                     Margin="4 2 4 4"
+                                     TextAlignment="Right"
+                                     materialDesign:TextFieldAssist.SuffixText="%"
+                                     Style="{StaticResource MaterialDesignTextBox}"
+                                     FontSize="16"
+                                     Foreground="#E9F0FA"
+                                     CaretBrush="#15A4FA"
+                                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                     materialDesign:HintAssist.Foreground="White"
+                                     VerticalAlignment="Bottom">
+                            </TextBox>
+
+                            <Button Margin="8 2 8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="-" FontSize="24" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+
+                        </StackPanel>
+
+                        <!--LDR-->
+                        <StackPanel Grid.Column="1" Margin="0 0 2 0">
+                            <Label Content="LDR" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 4"/>
+                            <TextBox Grid.Column="1"
+                                     Margin="4 0"
+                                     TextAlignment="Right"
+                                     materialDesign:TextFieldAssist.SuffixText="%"
+                                     Style="{StaticResource MaterialDesignTextBox}"
+                                     FontSize="16"
+                                     Foreground="#E9F0FA"
+                                     CaretBrush="#15A4FA"
+                                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                     materialDesign:HintAssist.Foreground="White"
+                                     VerticalAlignment="Bottom">
+                            </TextBox>
+                            <Button ToolTip="Read"
+                                    Margin="8 5 8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Bottom"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="R" FontSize="17" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                    
+                </StackPanel>
+            </Grid>
+
+            
+
+            <TextBlock Text="Input Send/Receive"
+                   FontWeight="UltraLight"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Grid.ColumnSpan="2"
+                   Margin="0 7 0 0"
+                   FontSize="20"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"/>
+
+        </Grid>
+
+        <!--OUTPUT-->
+        <Grid Grid.Row="1" Grid.Column="1"
+              Margin="7 7 14 7">
+
+            <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="2"
+                   Fill="#333C4E" RadiusY="5" RadiusX="5">
+            </Rectangle>
+
+            <Grid Margin="5 35 5 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!--Left column-->
+                <StackPanel Margin="10 10 5 0">
+                    <!--Net-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                        </TextBox>
+                    </Grid>
+
+                    <!--Output Range-->
+                    <Grid Margin="2 30 0 0">
+                        <TextBox Grid.Column="0"
+                             Margin="0 -12 0 0"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.HelperText="1, 2, 3 or 1-4000"
+                             FontSize="14"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Hint="Output Range"
+                             materialDesign:HintAssist.Foreground="White">
+                        </TextBox>
+                    </Grid>
+
+                    <!--Current-->
+                    <Grid Margin="0 30 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Current" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Margin="65 0 3 0"
+                                 TextAlignment="Right"
+                                 materialDesign:TextFieldAssist.SuffixText="A"
+                                 Style="{StaticResource MaterialDesignTextBox}"
+                                 FontSize="16"
+                                 Foreground="#E9F0FA"
+                                 CaretBrush="#15A4FA"
+                                 materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                 materialDesign:HintAssist.Foreground="White"
+                                 VerticalAlignment="Bottom">
+                        </TextBox>
+
+                        <Grid Grid.Column="1" Margin="5 -3 0 0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <!--Read-->
+                            <Button ToolTip="Read"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                                <Grid Margin="-10 -12 -10 -10">
+                                    <TextBlock Text="R" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid Margin="0 10 -44 0">
+                        <Label Content="Light" FontSize="16" HorizontalAlignment="Right" Margin="0 0 26 0" Foreground="#E9F0FA"/>
+                        <Ellipse Fill="White"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"
+                                HorizontalAlignment="Right"/>
+                    </Grid>
+                    
+
+                </StackPanel>
+
+                
+                <!--Right column-->
+                <StackPanel Grid.Column="1" Margin="5 10 10 0">
+                    <!--Group-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
+                        <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                        </TextBox>
+                    </Grid>
+
+                    <!--LED, PIR, LDR-->
+                    <Grid Margin="0 15 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--LED-->
+                        <StackPanel>
+                            <Label Content="LED" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 10"/>
+                            <Ellipse Fill="Red"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                            <Ellipse Fill="Green"
+                                     Margin="0 5"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                            <Ellipse Fill="Blue"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"/>
+                        </StackPanel>
+
+                        <!--POWER-->
+                        <StackPanel Grid.Column="1">
+                            <Label Content="PWR" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 5"/>
+                            <Button Margin="8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="+" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+
+                            <TextBox Grid.Column="1"
+                                     Margin="7 2 7 4"
+                                     TextAlignment="Right"
+                                     materialDesign:TextFieldAssist.SuffixText="%"
+                                     Style="{StaticResource MaterialDesignTextBox}"
+                                     FontSize="16"
+                                     Foreground="#E9F0FA"
+                                     CaretBrush="#15A4FA"
+                                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                     materialDesign:HintAssist.Foreground="White"
+                                     VerticalAlignment="Bottom">
+                            </TextBox>
+
+                            <Button Margin="8 2 8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="-" FontSize="24" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+
+                        </StackPanel>
+
+                        <!--TIME-->
+                        <StackPanel Grid.Column="2" Margin="2 0 0 0">
+                            <Label Content="TIME" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 4"/>
+                            <Button Margin="8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="+" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+
+                            <TextBox Grid.Column="1"
+                                     Margin="7 3 7 4"
+                                     TextAlignment="Center"
+                                     materialDesign:TextFieldAssist.SuffixText="m"
+                                     Style="{StaticResource MaterialDesignTextBox}"
+                                     FontSize="16"
+                                     Foreground="#E9F0FA"
+                                     CaretBrush="#15A4FA"
+                                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                     materialDesign:HintAssist.Foreground="White"
+                                     VerticalAlignment="Bottom">
+                            </TextBox>
+
+                            <Button Margin="8 2 8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                                <Grid>
+                                    <TextBlock Text="-" FontSize="24" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+
+                    </Grid>
+
+
+                </StackPanel>
+            </Grid>
+
+
+
+            <TextBlock Text="Output Send/Receive"
+                   FontWeight="UltraLight"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Grid.ColumnSpan="2"
+                   Margin="0 7 0 0"
+                   FontSize="20"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"/>
+
+        </Grid>
+
+        <!--Calibration Set-->
+        <Grid Grid.Row="2" Margin="14 7 7 14">
+            <Rectangle Fill="#333C4E" RadiusY="5" RadiusX="5">
+            </Rectangle>
+            <TextBlock Text="Calibration Set"
+                   FontWeight="UltraLight"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Grid.ColumnSpan="2"
+                   Margin="0 7 0 0"
+                   FontSize="20"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel VerticalAlignment="Center" Margin="10 3 0 0">
+                    <!--Start-->
+                    <Button Margin="30 5"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                        <Grid>
+                            <TextBlock Text="Start" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                        </Grid>
+                    </Button>
+                    <!--Fix-->
+                    <Button Margin="30 5"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                        <Grid>
+                            <TextBlock Text="Fix" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+
+                <!--Output Power-->
+                <Grid Grid.Column="1" Margin="0 40 20 10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Output Power" VerticalAlignment="Bottom" FontSize="16" Grid.ColumnSpan="2" HorizontalAlignment="Center" Foreground="#E9F0FA"/>
+                    <!--Light-->
+                    <Grid Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="0 0 0 0" HorizontalAlignment="Left">
+                        <Label Content="Light" FontSize="16" HorizontalAlignment="Right" Margin="0 0 28 0" Foreground="#E9F0FA"/>
+                        <Ellipse Fill="White"
+                                 Margin="0 0 3 0"
+                                Opacity="0.4"
+                                Width="22"
+                                Height="22"
+                                HorizontalAlignment="Right"/>
+                    </Grid>
+
+                    <!--POWER-->
+                    <StackPanel Grid.Row="1" Margin="0 0 10 0">
+                        <Label Content="PWR" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 5"/>
+                        <Button Margin="8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                            <Grid>
+                                <TextBlock Text="+" FontSize="22" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                            </Grid>
+                        </Button>
+
+                        <TextBox Grid.Column="1"
+                                     Margin="7 2 7 4"
+                                     TextAlignment="Right"
+                                     materialDesign:TextFieldAssist.SuffixText="%"
+                                     Style="{StaticResource MaterialDesignTextBox}"
+                                     FontSize="16"
+                                     Foreground="#E9F0FA"
+                                     CaretBrush="#15A4FA"
+                                     materialDesign:TextFieldAssist.UnderlineBrush="White"
+                                     materialDesign:HintAssist.Foreground="White"
+                                     VerticalAlignment="Bottom">
+                        </TextBox>
+
+                        <Button Margin="8 2 8 0"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Top"
+                                    materialDesign:RippleAssist.IsDisabled="True"
+                                    Background="#3E4960"
+                                    BorderBrush="Transparent">
+                            <Grid>
+                                <TextBlock Text="-" FontSize="24" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                            </Grid>
+                        </Button>
+
+                    </StackPanel>
+                </Grid>
+                
+            </Grid>
+            
+        </Grid>
+
+
+        <!--Readdress-->
+        <Grid Grid.Row="2" Grid.Column="2" Margin="7 7 14 14">
+            <Rectangle 
+            Fill="#333C4E" RadiusY="5" RadiusX="5">
+            </Rectangle>
+            <TextBlock Text="Readdress individual device Set"
+                   FontWeight="UltraLight"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}"
+                   Grid.ColumnSpan="2"
+                   Margin="0 7 0 0"
+                   FontSize="20"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   TextWrapping="Wrap"/>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="5 40 10 0">
+                    <!--Net-->
+                    <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                    </TextBox>
+                    <!--Read-->
+                    <Button Margin="0 50 0 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                        <Grid>
+                            <TextBlock Text="Read" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#15A4FA" FontWeight="Light"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5 40 7 0">
+                    <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-250"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                    </TextBox>
+
+                    <!--Write-->
+                    <Button Margin="0 50 0 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                        <Grid>
+                            <TextBlock Text="Write" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#F44C7F" FontWeight="Light"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Margin="7 40 5 0">
+                    <Label Content="Id" FontSize="16" Foreground="#E9F0FA"/>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource MaterialDesignTextBox}"
+                             materialDesign:HintAssist.HelperText="1-4000"
+                             FontSize="16"
+                             Foreground="#E9F0FA"
+                             CaretBrush="#15A4FA"
+                             materialDesign:TextFieldAssist.UnderlineBrush="White"
+                             materialDesign:HintAssist.Foreground="White"
+                             VerticalAlignment="Bottom">
+                    </TextBox>
+
+                    <!--Write Plus-->
+                    <Button Margin="0 50 0 0"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Bottom"
+                                materialDesign:RippleAssist.IsDisabled="True"
+                                Background="#3E4960"
+                                BorderBrush="Transparent">
+                        <Grid>
+                            <TextBlock Text="Write+" Margin="-5 0" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#E9F0FA" FontWeight="Light"/>
+                        </Grid>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Margin="5 40 5 0" Grid.Column="3">
+                    <Label Content="Type" FontSize="16" HorizontalAlignment="Center" Foreground="#E9F0FA"/>
+                    <RadioButton GroupName="Readdress" Content="IN" HorizontalAlignment="Left"
+                                 Margin="12 11 0 0"
+                                 BorderBrush="#15A4FA"
+                                 Background="#15A4FA"
+                                 Foreground="White">
+                    </RadioButton>
+                    <RadioButton GroupName="Readdress" Content="OUT" HorizontalAlignment="Left"
+                                 Margin="12 20 0 0"
+                                 BorderBrush="#15A4FA"
+                                 Background="#15A4FA"
+                                 Foreground="White">
+                    </RadioButton>
+                    <RadioButton GroupName="Readdress" Content="IN/OUT" HorizontalAlignment="Left"
+                                 Margin="12 20 0 0"
+                                 BorderBrush="#15A4FA"
+                                 Background="#15A4FA"
+                                 Foreground="White">
+                    </RadioButton>
+                </StackPanel>
+                
+            </Grid>
+        </Grid>
+        
+
+    </Grid>
+</Window>
