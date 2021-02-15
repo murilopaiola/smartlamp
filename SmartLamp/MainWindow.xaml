@@ -32,6 +32,12 @@
         <Rectangle
             Fill="#333C4E" RadiusY="5" RadiusX="5" Margin="14 14 175 7">
         </Rectangle>
+        <Rectangle Margin="20 20 180 11">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Assets/logo.png" Stretch="Fill"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <!--<Image x:Name="IcatelLogo" Source="Assets/logo.png" IsEnabled="False" RenderOptions.BitmapScalingMode="HighQuality"/>-->
 
         <!--Converter Power-->
         <Grid Grid.Column="1"
@@ -100,6 +106,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Grid.Column="1"
+                             Text="{Binding Net}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -119,6 +127,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Id" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Grid.Column="1"
+                             Text="{Binding Id}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-4000"
                              FontSize="16"
@@ -137,6 +147,7 @@
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBox Grid.Column="0"
+                             Text="{Binding OutputRange}"
                              Margin="0 -12 7 0"
                              VerticalAlignment="Center"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -193,6 +204,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Grid.Column="1"
+                             Text="{Binding Group}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -245,6 +258,7 @@
                             </Button>
 
                             <TextBox Grid.Column="1"
+                                     PreviewTextInput="NumberOnlyValidation"
                                      Margin="4 2 4 4"
                                      TextAlignment="Right"
                                      materialDesign:TextFieldAssist.SuffixText="%"
@@ -274,6 +288,7 @@
                         <StackPanel Grid.Column="1" Margin="0 0 2 0">
                             <Label Content="LDR" FontSize="17" HorizontalAlignment="Center" Foreground="#E9F0FA" Margin="0 0 0 4"/>
                             <TextBox Grid.Column="1"
+                                     PreviewTextInput="NumberOnlyValidation"
                                      Margin="4 0"
                                      TextAlignment="Right"
                                      materialDesign:TextFieldAssist.SuffixText="%"
@@ -343,6 +358,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Grid.Column="1"
+                                 Text="{Binding Net}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -378,6 +395,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Current" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Margin="65 0 3 0"
+                                 PreviewTextInput="NumberOnlyValidation"
                                  TextAlignment="Right"
                                  materialDesign:TextFieldAssist.SuffixText="A"
                                  Style="{StaticResource MaterialDesignTextBox}"
@@ -432,6 +450,8 @@
                         </Grid.ColumnDefinitions>
                         <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
                         <TextBox Grid.Column="1"
+                                 Text="{Binding Group}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -484,6 +504,7 @@
                             </Button>
 
                             <TextBox Grid.Column="1"
+                                     PreviewTextInput="NumberOnlyValidation"
                                      Margin="7 2 7 4"
                                      TextAlignment="Right"
                                      materialDesign:TextFieldAssist.SuffixText="%"
@@ -524,6 +545,7 @@
                             </Button>
 
                             <TextBox Grid.Column="1"
+                                     PreviewTextInput="NumberOnlyValidation"
                                      Margin="7 3 7 4"
                                      TextAlignment="Center"
                                      materialDesign:TextFieldAssist.SuffixText="m"
@@ -651,6 +673,7 @@
                         </Button>
 
                         <TextBox Grid.Column="1"
+                                     PreviewTextInput="NumberOnlyValidation"
                                      Margin="7 2 7 4"
                                      TextAlignment="Right"
                                      materialDesign:TextFieldAssist.SuffixText="%"
@@ -709,6 +732,8 @@
                     <!--Net-->
                     <Label Content="Net" FontSize="16" Foreground="#E9F0FA"/>
                     <TextBox Grid.Column="1"
+                             Text="{Binding Net}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -734,6 +759,8 @@
                 <StackPanel Grid.Column="1" Margin="5 40 7 0">
                     <Label Content="Group" FontSize="16" Foreground="#E9F0FA"/>
                     <TextBox Grid.Column="1"
+                             Text="{Binding Group}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-250"
                              FontSize="16"
@@ -760,6 +787,8 @@
                 <StackPanel Grid.Column="2" Margin="7 40 5 0">
                     <Label Content="Id" FontSize="16" Foreground="#E9F0FA"/>
                     <TextBox Grid.Column="1"
+                             Text="{Binding Id}"
+                             PreviewTextInput="NumberOnlyValidation"
                              Style="{StaticResource MaterialDesignTextBox}"
                              materialDesign:HintAssist.HelperText="1-4000"
                              FontSize="16"
