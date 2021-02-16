@@ -7,37 +7,36 @@ using System.Threading.Tasks;
 
 namespace SmartLamp.Models
 {
-    public class SLBuffer
+    public class SLBuffer : ObservableObject
     {
         public byte[] bytes;
-        public SLBuffer(int size)
+        public SLBuffer()
         {
-            bytes = new byte[size];
+            bytes = new byte[11];
         }
 
-        public string Net 
+        public byte Net 
         { 
             get
             {
-                return Convert.ToString(bytes[0]);
+                return bytes[0];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[0] = val;
+                bytes[0] = value;
             }
         }
 
-        public string Group
+        public byte Group
         {
             get
             {
-                return Convert.ToString(bytes[1]);
+                return bytes[1];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[1] = val;
+                bytes[1] = value;
+                
             }
         }
 
@@ -50,6 +49,7 @@ namespace SmartLamp.Models
             set
             {
                 bytes[2] = value;
+                
             }
         }
 
@@ -62,106 +62,99 @@ namespace SmartLamp.Models
             set
             {
                 bytes[3] = value;
+                
             }
         }
 
-        public string Funcao
+        public byte Funcao
         {
             get
             {
-                return Convert.ToString(bytes[4]);
+                return bytes[4];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[4] = val;
+                bytes[4] = value;
+                
             }
         }
 
-        public string Endih
+        public byte Endih
         {
             get
             {
-                return Convert.ToString(bytes[5]);
+                return bytes[5];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[5] = val;
+                bytes[5] = value;
+                
             }
         }
 
-        public string Endil
+        public byte Endil
         {
             get
             {
-                return Convert.ToString(bytes[6]);
+                return bytes[6];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[6] = val;
+                bytes[6] = value;
+                
             }
         }
 
-        public string Endfh
+        public byte Endfh
         {
             get
             {
-                return Convert.ToString(bytes[7]);
+                return bytes[7];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[7] = val;
+                bytes[7] = value;
             }
         }
 
-        public string Endfl
+        public byte Endfl
         {
             get
             {
-                return Convert.ToString(bytes[8]);
+                return bytes[8];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[8] = val;
+                bytes[8] = value;
+                
             }
         }
 
-        public string Param
+        public byte Param
         {
             get
             {
-                return Convert.ToString(bytes[9]);
+                return bytes[9];
             }
             set
             {
-                byte val = value.GetBytesFromString();
-                bytes[9] = val;
+                bytes[9] = value;
             }
         }
 
-        //XOR todos outros parametros
         public byte Crc
         {
             get
             {
-                if (bytes[10] == 0)
-                {
-                    byte result = 0;
-                    foreach (var by in bytes[0..^1])
-                        result ^= by;
-                    return result;
-                }
-
                 return bytes[10];
             }
-            set
-            {
-                bytes[10] = value;
-            }
+        }
+
+        public void UpdateBufferCrc()
+        {
+            var slice = bytes[0..^1];
+            var result = slice.Aggregate((a, b) => a ^= b);
+            bytes[10] = result;
         }
     }
 }

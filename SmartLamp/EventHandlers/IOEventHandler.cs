@@ -5,13 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
+using SmartLamp.Models;
+using System.Diagnostics;
 
 namespace SmartLamp.EventHandlers
 {
     public class WriteEventArgs : EventArgs
     {
-        public byte[] Data { get; set; }
-        public WriteEventArgs(byte[] message) => Data = message;
+        public SLBuffer Data { get; set; }
+        public WriteEventArgs(SLBuffer message) => Data = message;
     }
 
     public class IOEventHandler
@@ -34,6 +36,8 @@ namespace SmartLamp.EventHandlers
 
         private void OnWriteDataReceived(object s, WriteEventArgs e)
         {
+            e.Data.UpdateBufferCrc();
+            Trace.WriteLine(BitConverter.ToString(e.Data.bytes));
             //Write to COM port stream
         }
     }

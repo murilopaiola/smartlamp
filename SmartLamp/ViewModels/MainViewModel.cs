@@ -15,22 +15,21 @@ namespace SmartLamp.ViewModels
     {
         private readonly IOEventHandler _ioEventHandler;
 
-        public SLBuffer Buffer = new SLBuffer(11);
+        public SLBuffer Buffer = new SLBuffer();
 
         #region Properties
         public string Net
         { 
             get
             {
-                return Convert.ToString(Buffer.bytes[0]);
+                return Convert.ToString(Buffer.Net);
             }
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                Buffer.Net = value;
-                OnPropertyChanged(nameof(Net));
+                if (string.IsNullOrEmpty(value) || int.Parse(value) > 255) return;
+                Buffer.Net = value.GetByteFromString();
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -38,15 +37,14 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(Buffer.bytes[1]);
+                return Convert.ToString(Buffer.Group);
             }
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                Buffer.Group = value;
-                OnPropertyChanged(nameof(Group));
+                if (string.IsNullOrEmpty(value) || int.Parse(value) > 255) return;
+                Buffer.Group = value.GetByteFromString();
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -54,18 +52,18 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(BitConverter.ToUInt16(new byte[2] { Buffer.Idh, Buffer.Idl }, 0));
+                // this has to be reverted
+                var bytes = new byte[2] { Buffer.Idl, Buffer.Idh };
+                return Convert.ToString(BitConverter.ToUInt16(bytes));
             }
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                ushort intValue = Convert.ToUInt16(value);
-                var bytes = BitConverter.GetBytes(intValue);
-                Buffer.Idh = bytes[0];
-                Buffer.Idl = bytes[1];
-                OnPropertyChanged(nameof(Id));
+                if (string.IsNullOrEmpty(value) || int.Parse(value) > 65535) return;
+                var val = value.GetBytesFromString();
+                Buffer.Idh = val[0];
+                Buffer.Idl = val[1];
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -73,15 +71,15 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(Buffer.bytes[5]);
+                var bytes = new byte[2] { Buffer.Endil, Buffer.Endih };
+                return Convert.ToString(BitConverter.ToUInt16(bytes));
             }
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                Buffer.Endih = value;
-                OnPropertyChanged(nameof(Endi));
-                OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                if (string.IsNullOrEmpty(value) || int.Parse(value) > 65535) return;
+                var val = value.GetBytesFromString();
+                Buffer.Endih = val[0];
+                Buffer.Endil = val[1];
             }
         }
 
@@ -89,15 +87,17 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(Buffer.bytes[7]);
+                var bytes = new byte[2] { Buffer.Endfl, Buffer.Endfh };
+                return Convert.ToString(BitConverter.ToUInt16(bytes));
             }
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                Buffer.Endfh = value;
-                OnPropertyChanged(nameof(Endf));
+                if (string.IsNullOrEmpty(value) || int.Parse(value) > 65535) return;
+                var val = value.GetBytesFromString();
+                Buffer.Endfh = val[0];
+                Buffer.Endfl = val[1];
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -105,15 +105,15 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(Buffer.bytes[9]);
+                return Convert.ToString(Buffer.Param);
             }
             set
             {
                 if (string.IsNullOrEmpty(value)) return;
-                Buffer.Param = value;
+                Buffer.Param = value.GetByteFromString();
                 OnPropertyChanged(nameof(Param));
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -121,14 +121,14 @@ namespace SmartLamp.ViewModels
         {
             get
             {
-                return Convert.ToString(Buffer.bytes[4]);
+                return Convert.ToString(Buffer.Funcao);
             }
             set
             {
-                Buffer.Funcao = value;
+                Buffer.Funcao = value.GetByteFromString();
                 OnPropertyChanged(nameof(Funcao));
                 OnPropertyChanged(nameof(Buffer));
-                OnBufferChanged(new WriteEventArgs(Buffer.bytes));
+                OnBufferChanged(new WriteEventArgs(Buffer));
             }
         }
 
@@ -152,9 +152,15 @@ namespace SmartLamp.ViewModels
                     if (!int.TryParse(id, out int _))
                         throw new ArithmeticException("Output Range value is invalid.");
 
-                IdRange = split;
+                var sorted = split.OrderBy(x => int.Parse(x)).ToArray();
 
-                OnPropertyChanged(nameof(OutputRange));
+                if (split.Length == 2 && value.Contains('-'))
+                {
+                    Endi = sorted[0];
+                    Endf = sorted[1];
+                }
+
+                IdRange = sorted;
             }
         }
 

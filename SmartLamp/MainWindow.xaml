@@ -374,6 +374,7 @@
                     <!--Output Range-->
                     <Grid Margin="2 30 0 0">
                         <TextBox Grid.Column="0"
+                             Text="{Binding OutputRange}"
                              Margin="0 -12 0 0"
                              VerticalAlignment="Center"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
